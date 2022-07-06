@@ -79,9 +79,6 @@ public class Janken {
         }
         showOption();
         int userRand = s.nextInt();
-        System.out.println("press the key");
-        String a = s.next();
-        System.out.println("you press" + a);
         decideUserHand(userRand);
         decideCPHand();
         decideWinner();
