@@ -4,14 +4,20 @@ import java.util.Scanner;
 public class Acchimuitehoi {
 
     private String winner;
-    private AhOption finger = new AhOption("👉", "👈", "👆", "👇");
-    private AhOption face = new AhOption("🗣️", "🚶", "🙄", "🙃");
-    private String userDirection = "";
-    private String cpDirection = "";
-    private Boolean isUserTurn = false;
+    private AhOption finger;
+    private AhOption face;
+    private String userDirection;
+    private String cpDirection;
+    private Boolean isUserTurn;
 
-    
-    
+
+    public Acchimuitehoi() {
+        finger = new AhOption("👉", "👈", "👆", "👇");
+        face = new AhOption("🗣️", "🚶", "🙄", "🙃");
+        userDirection =  "";
+        cpDirection = "";
+        isUserTurn = false;
+    }
 
     public String getUserDirection() {
         return userDirection;
