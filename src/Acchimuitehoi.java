@@ -26,27 +26,31 @@ public class Acchimuitehoi {
     }
     
     public void doAcchimuitehoi(String jankenWinner, Scanner s) {
-
+        userDirection = "";
+        cpDirection = "";
         try{
             if (jankenWinner.equals("user")) {
                 showOption(hand.getUp(), hand.getRight(), hand.getDown(), hand.getLeft());
                 String directionKey = s.next();
+                Thread.sleep(1000);
+                ClrScr.clrscr(); 
                 decideUserDirection(directionKey, hand);
-                decideCPDirection(face);      
+                decideCPDirection(face);   
                 isUserTurn = true;
                 System.out.println(decideWinner());
             } else {
                 showOption(face.getUp(), face.getRight(), face.getDown(), face.getLeft());
                 String directionKey = s.next();
+                Thread.sleep(1000);
+                ClrScr.clrscr();
                 decideUserDirection(directionKey, face);
-                decideCPDirection(hand);       
+                decideCPDirection(hand);
                 System.out.println(decideWinner());
             }
         } catch (Exception e) {
             ClrScr.clrscr();
             System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
         }
-
        
     }
 

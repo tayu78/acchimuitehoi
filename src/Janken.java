@@ -5,14 +5,26 @@ import java.util.Scanner;
 public class Janken {
 
     private int rand;
-    private boolean isFirstTurn = true;
-    private String userHand = "";
-    private String cpHand = "";
+    private boolean isFirstTurn;
+    private String userHand;
+    private String cpHand;
     private String winner;
-    private String gu = "gu ✊";
-    private String choki = "choki ✌";
-    private String pa = "pa 🖐";
+    private String gu;
+    private String choki;
+    private String pa;
+
     
+    
+    public Janken() {
+        this.isFirstTurn = true;
+        this.userHand = "";
+        this.cpHand = "";
+        this.gu = "gu ✊";
+        this.choki = "choki ✌";
+        this.pa = "pa 🖐";
+    }
+
+
     public String decideHand(int rand) {
         if (rand == 1)
             return gu;
@@ -37,8 +49,9 @@ public class Janken {
     public String decideWinner() {
         if ((userHand.equals(gu) && cpHand.equals(choki)) || (userHand.equals(choki) && cpHand.equals(pa) || (userHand.equals(pa) && cpHand.equals(gu))))
             winner = "user";
-        else if (userHand.equals(cpHand))
+        else if (userHand.equals(cpHand)){
             winner = "none";
+        }
         else
             winner = "cp";
 
@@ -55,7 +68,7 @@ public class Janken {
                 System.out.println("You lose...");
                 break;
             default:
-                System.out.println("aiko de ...");
+                System.out.println("aiko de sho!");
         }
     }
 
@@ -71,6 +84,7 @@ public class Janken {
         try {
             if (isFirstTurn) {
                 System.out.printf("saisyo ha %s\n", gu);
+                Thread.sleep(1000);
                 System.out.println("jan ken poi!");
                 isFirstTurn = false;
             }
@@ -78,9 +92,15 @@ public class Janken {
             int userRand = s.nextInt();
             if (userRand < 1 || userRand > 3)
                 throw new Exception();
+
+            Thread.sleep(500);
             ClrScr.clrscr();
+            
             decideUserHand(userRand);
             decideCPHand();
+
+            Thread.sleep(1000);
+
             decideWinner();
             showWinner();
         } catch (InputMismatchException e) {

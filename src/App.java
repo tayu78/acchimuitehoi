@@ -7,9 +7,12 @@ public class App {
             Acchimuitehoi ah = new Acchimuitehoi();
             Scanner s = new Scanner(System.in);
             do {
+                System.out.println("hi");
                  j.doJanken(s);
-                 if (j.decideWinner().equals("none")) continue;
-                
+                 if (j.decideWinner().equals("none"))
+                     continue;
+                 
+                // loop to retry acchimuitehoi without janken if user type wrong input
                 while (!j.decideWinner().equals("none") && ah.decideWinner().equals("none")) {
                     ah.doAcchimuitehoi(j.decideWinner(), s);
                     if (!ah.getUserDirection().equals("")) break; // this means no input mismatch error occured
@@ -19,6 +22,8 @@ public class App {
         }
 
    
+        //2kaime janken kimatteru
+        //        ah.
 
    
 }
