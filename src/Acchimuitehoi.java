@@ -26,12 +26,12 @@ public class Acchimuitehoi {
         return userDirection;
     }
 
-    public void showOption(String up, String right, String down, String left) {
+    public void showOption(AhOption opt) {
         System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
-        System.out.printf("%s : press W\n", up);
-        System.out.printf("%s : press D\n", right);
-        System.out.printf("%s : press S\n", down);
-        System.out.printf("%s : press A\n", left);
+        System.out.printf("%s : press W\n", opt.getUp());
+        System.out.printf("%s : press D\n", opt.getRight());
+        System.out.printf("%s : press S\n", opt.getDown());
+        System.out.printf("%s : press A\n", opt.getLeft());
         System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
     }
     
@@ -106,7 +106,7 @@ public class Acchimuitehoi {
              Thread.sleep(1000);
              if (jankenWinner.equals("user")) {
                 isUserTurn = true;
-                showOption(finger.getUp(), finger.getRight(), finger.getDown(), finger.getLeft());
+                showOption(finger);
                 String directionKey = s.next();
                 Thread.sleep(1000);
                 ClrScr.clrscr(); 
@@ -116,7 +116,7 @@ public class Acchimuitehoi {
                 winner = decideWinner();
                 showWinner();
             } else {
-                showOption(face.getUp(), face.getRight(), face.getDown(), face.getLeft());
+                showOption(face);
                 String directionKey = s.next();
                 Thread.sleep(1000);
                 ClrScr.clrscr();
