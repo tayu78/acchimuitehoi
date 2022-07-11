@@ -4,11 +4,13 @@ import java.util.Scanner;
 public class Acchimuitehoi {
 
     private String winner;
-    private AhOption hand = new AhOption("👉", "👈", "👆", "👇");
+    private AhOption finger = new AhOption("👉", "👈", "👆", "👇");
     private AhOption face = new AhOption("🗣️", "🚶", "🙄", "🙃");
     private String userDirection = "";
     private String cpDirection = "";
     private Boolean isUserTurn = false;
+
+    
     
 
     public String getUserDirection() {
@@ -67,7 +69,7 @@ public class Acchimuitehoi {
             return "none";
     }
     
-    private void showWinner() {
+    private void showWinner() throws InterruptedException {
         switch (winner) {
             case ("user"):
                 System.out.println("you win !!");
@@ -77,6 +79,8 @@ public class Acchimuitehoi {
                 break;
             case ("none"):
                 System.out.println("winner not decided. back to janken!");
+                Thread.sleep(2000);
+                ClrScr.clrscr();
                 break;
         }
     }
@@ -92,11 +96,11 @@ public class Acchimuitehoi {
         try {
              Thread.sleep(1000);
             if (jankenWinner.equals("user")) {
-                showOption(hand.getUp(), hand.getRight(), hand.getDown(), hand.getLeft());
+                showOption(finger.getUp(), finger.getRight(), finger.getDown(), finger.getLeft());
                 String directionKey = s.next();
                 Thread.sleep(1000);
                 ClrScr.clrscr(); 
-                decideUserDirection(directionKey, hand);
+                decideUserDirection(directionKey, finger);
                 decideCPDirection(face);
                 showResult();  
                 isUserTurn = true;
@@ -108,11 +112,12 @@ public class Acchimuitehoi {
                 Thread.sleep(1000);
                 ClrScr.clrscr();
                 decideUserDirection(directionKey, face);
-                decideCPDirection(hand);
+                decideCPDirection(finger);
                 showResult();
                 winner = decideWinner();
                 showWinner();
             }
+          
         } catch (Exception e) {
             ClrScr.clrscr();
             System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
