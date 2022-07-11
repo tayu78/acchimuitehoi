@@ -2,6 +2,8 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+import util.ClrScr;
+
 public class Janken {
 
     private int rand;

@@ -1,6 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 
+import util.AhOption;
+import util.ClrScr;
+
 public class Acchimuitehoi {
 
     private String winner;
