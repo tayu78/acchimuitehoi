@@ -7,10 +7,13 @@ public class App {
             Acchimuitehoi ah = new Acchimuitehoi();
             Scanner s = new Scanner(System.in);
             do {
-                j.doJanken(s);
-                if (j.decideWinner().equals("none"))
-                    continue;
-                ah.doAcchimuitehoi(j.decideWinner(), s);
+                 j.doJanken(s);
+                 if (j.decideWinner().equals("none")) continue;
+                
+                while (!j.decideWinner().equals("none") && ah.decideWinner().equals("none")) {
+                    ah.doAcchimuitehoi(j.decideWinner(), s);
+                    if (!ah.getUserDirection().equals("")) break; // this means no input mismatch error occured
+                }
             } while (j.decideWinner().equals("none") || ah.decideWinner().equals("none"));
             s.close();
         }

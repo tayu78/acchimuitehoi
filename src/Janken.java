@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -5,8 +6,8 @@ public class Janken {
 
     private int rand;
     private boolean isFirstTurn = true;
-    private String userHand;
-    private String cpHand;
+    private String userHand = "";
+    private String cpHand = "";
     private String winner;
     private String gu = "gu ✊";
     private String choki = "choki ✌";
@@ -67,18 +68,29 @@ public class Janken {
     }
 
     public void doJanken(Scanner s) {
-        if (isFirstTurn) {
-            System.out.printf("saisyo ha %s\n",gu);
-            System.out.println("jan ken ...");
-            isFirstTurn = false;
+        try {
+            if (isFirstTurn) {
+                System.out.printf("saisyo ha %s\n", gu);
+                System.out.println("jan ken poi!");
+                isFirstTurn = false;
+            }
+            showOption();
+            int userRand = s.nextInt();
+            if (userRand < 1 || userRand > 3)
+                throw new Exception();
+            ClrScr.clrscr();
+            decideUserHand(userRand);
+            decideCPHand();
+            decideWinner();
+            showWinner();
+        } catch (InputMismatchException e) {
+            ClrScr.clrscr();
+            System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
+            s.next(); // prevent infinite loop because of input mismatch
+        } catch(Exception e){
+            ClrScr.clrscr();
+            System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
         }
-        showOption();
-        int userRand = s.nextInt();
-        ClrScr.clrscr();
-        decideUserHand(userRand);
-        decideCPHand();
-        decideWinner();
-        showWinner();
     }
 
 
