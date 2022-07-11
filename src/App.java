@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
@@ -13,8 +12,6 @@ public class App {
                     continue;
                 ah.doAcchimuitehoi(j.decideWinner(), s);
             } while (j.decideWinner().equals("none") || ah.decideWinner().equals("none"));
-           
-            // ah.doAcchimuitehoi("user",s);
             s.close();
         }
 
