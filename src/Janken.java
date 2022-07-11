@@ -8,21 +8,16 @@ public class Janken {
     private String userHand;
     private String cpHand;
     private String winner;
+    private String gu = "gu ✊";
+    private String choki = "choki ✌";
+    private String pa = "pa 🖐";
     
-    // public Janken() {
-    //     this.rand = new Random().nextInt(2) + 1;
-    //         }
-    
-    // public Janken(int rand) {
-    //     this.rand = rand;
-    // }
-
     public String decideHand(int rand) {
         if (rand == 1)
-            return "gu";
+            return gu;
         else if (rand == 2)
-            return "choki";
-        return "pa";
+            return choki;
+        return pa;
     }
 
 
@@ -35,11 +30,11 @@ public class Janken {
         rand = new Random().nextInt(2) + 1;
         cpHand = decideHand(rand);
         System.out.println("cp: " + cpHand);
-
     }
 
+    
     public String decideWinner() {
-        if ((userHand.equals("gu") && cpHand.equals("choki")) || (userHand.equals("choki") && cpHand.equals("pa") || (userHand.equals("pa") && cpHand.equals("gu"))))
+        if ((userHand.equals(gu) && cpHand.equals(choki)) || (userHand.equals(choki) && cpHand.equals(pa) || (userHand.equals(pa) && cpHand.equals(gu))))
             winner = "user";
         else if (userHand.equals(cpHand))
             winner = "none";
@@ -65,25 +60,29 @@ public class Janken {
 
     public void showOption() {
         System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
-        System.out.println("gu : press 1");
-        System.out.println("choki : press 2");
-        System.out.println("pa : press 3");
+        System.out.printf("%s : press 1\n",gu);
+        System.out.printf("%s : press 2\n",choki);
+        System.out.printf("%s : press 3\n",pa);
         System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
     }
 
     public void doJanken(Scanner s) {
         if (isFirstTurn) {
-            System.out.println("saisyo ha gu");
+            System.out.printf("saisyo ha %s\n",gu);
             System.out.println("jan ken ...");
             isFirstTurn = false;
         }
         showOption();
         int userRand = s.nextInt();
+        ClrScr.clrscr();
         decideUserHand(userRand);
         decideCPHand();
         decideWinner();
         showWinner();
     }
+
+
+   
     
    
 }
