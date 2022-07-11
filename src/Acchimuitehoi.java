@@ -104,7 +104,8 @@ public class Acchimuitehoi {
         System.out.println("acchimuite hoi!!");
         try {
              Thread.sleep(1000);
-            if (jankenWinner.equals("user")) {
+             if (jankenWinner.equals("user")) {
+                isUserTurn = true;
                 showOption(finger.getUp(), finger.getRight(), finger.getDown(), finger.getLeft());
                 String directionKey = s.next();
                 Thread.sleep(1000);
@@ -112,7 +113,6 @@ public class Acchimuitehoi {
                 decideUserDirection(directionKey, finger);
                 decideCPDirection(face);
                 showResult();  
-                isUserTurn = true;
                 winner = decideWinner();
                 showWinner();
             } else {
