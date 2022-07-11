@@ -110,10 +110,14 @@ public class Janken {
         } catch (InputMismatchException e) {
             ClrScr.clrscr();
             System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
+            userHand = "";
+            cpHand = "";
             s.next(); // prevent infinite loop because of input mismatch
         } catch(Exception e){
             ClrScr.clrscr();
             System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
+            userHand = "";
+            cpHand = "" ;
         }
     }
 
