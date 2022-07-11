@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Janken {
 
     private int rand;
-    private boolean isFirstTurn;
+    private boolean saySaisyohaGu;
     private String userHand;
     private String cpHand;
     private String winner;
@@ -16,12 +16,17 @@ public class Janken {
     
     
     public Janken() {
-        this.isFirstTurn = true;
+        this.saySaisyohaGu = true;
         this.userHand = "";
         this.cpHand = "";
         this.gu = "gu ✊";
         this.choki = "choki ✌";
         this.pa = "pa 🖐";
+    }
+
+
+    public void setSaySaisyohaGu(boolean saySaisyohaGu) {
+        this.saySaisyohaGu = saySaisyohaGu;
     }
 
 
@@ -36,40 +41,37 @@ public class Janken {
 
     public void decideUserHand(int rand) {
         userHand = decideHand(rand);
-       System.out.println("you : " +  userHand);
     }
 
     public void decideCPHand() {
         rand = new Random().nextInt(2) + 1;
         cpHand = decideHand(rand);
-        System.out.println("cp: " + cpHand);
     }
 
     
     public String decideWinner() {
-        if ((userHand.equals(gu) && cpHand.equals(choki)) || (userHand.equals(choki) && cpHand.equals(pa) || (userHand.equals(pa) && cpHand.equals(gu))))
+        if ((userHand.equals(gu) && cpHand.equals(choki))
+                || (userHand.equals(choki) && cpHand.equals(pa) || (userHand.equals(pa) && cpHand.equals(gu))))
             winner = "user";
-        else if (userHand.equals(cpHand)){
+        else if (userHand.equals(cpHand)) {
             winner = "none";
-        }
-        else
+        } else
             winner = "cp";
 
         return winner;
     }
+    
+    public void showResult(){
+        System.out.println("================== ==================");
+        System.out.println("      you                cp         ");
+        System.out.printf("      %s            %s   \n",userHand,cpHand);
+        System.out.println("================== ==================");
+    }
 
 
-    public void showWinner() {
-        switch (winner) {
-            case ("user"):
-                System.out.println("You win!");
-                break;
-            case ("cp"):
-                System.out.println("You lose...");
-                break;
-            default:
-                System.out.println("aiko de sho!");
-        }
+    public void sayAikoDeSho() {
+        if (winner.equals("none"))
+            System.out.println("aiko de sho!");
     }
 
     public void showOption() {
@@ -82,11 +84,11 @@ public class Janken {
 
     public void doJanken(Scanner s) {
         try {
-            if (isFirstTurn) {
+            if (saySaisyohaGu) {
                 System.out.printf("saisyo ha %s\n", gu);
                 Thread.sleep(1000);
                 System.out.println("jan ken poi!");
-                isFirstTurn = false;
+                saySaisyohaGu = false;
             }
             showOption();
             int userRand = s.nextInt();
@@ -98,11 +100,13 @@ public class Janken {
             
             decideUserHand(userRand);
             decideCPHand();
+            showResult();
 
             Thread.sleep(1000);
 
             decideWinner();
-            showWinner();
+            sayAikoDeSho();
+
         } catch (InputMismatchException e) {
             ClrScr.clrscr();
             System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
@@ -113,8 +117,4 @@ public class Janken {
         }
     }
 
-
-   
-    
-   
 }

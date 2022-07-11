@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 public class Acchimuitehoi {
 
-    // private String winner;
-
+    private String winner;
     private AhOption hand = new AhOption("👉", "👈", "👆", "👇");
     private AhOption face = new AhOption("🗣️", "🚶", "🙄", "🙃");
     private String userDirection = "";
@@ -25,35 +24,6 @@ public class Acchimuitehoi {
         System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
     }
     
-    public void doAcchimuitehoi(String jankenWinner, Scanner s) {
-        userDirection = "";
-        cpDirection = "";
-        try{
-            if (jankenWinner.equals("user")) {
-                showOption(hand.getUp(), hand.getRight(), hand.getDown(), hand.getLeft());
-                String directionKey = s.next();
-                Thread.sleep(1000);
-                ClrScr.clrscr(); 
-                decideUserDirection(directionKey, hand);
-                decideCPDirection(face);   
-                isUserTurn = true;
-                System.out.println(decideWinner());
-            } else {
-                showOption(face.getUp(), face.getRight(), face.getDown(), face.getLeft());
-                String directionKey = s.next();
-                Thread.sleep(1000);
-                ClrScr.clrscr();
-                decideUserDirection(directionKey, face);
-                decideCPDirection(hand);
-                System.out.println(decideWinner());
-            }
-        } catch (Exception e) {
-            ClrScr.clrscr();
-            System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
-        }
-       
-    }
-
 
     public void decideUserDirection(String directionKey, AhOption obj) throws Exception {
         switch (directionKey.toUpperCase()) {
@@ -72,30 +42,84 @@ public class Acchimuitehoi {
             default:
                 throw new Exception();
         }
-        System.out.println("you: " + userDirection);
     }
     
     public void decideCPDirection(AhOption obj) {
         int rand = new Random().nextInt(4);
         cpDirection = obj.getOps().get(rand);
-        System.out.println("cp: " + cpDirection);
+    }
+
+    public void showResult(){
+        System.out.println("================== ==================");
+        System.out.println("      you                cp         ");
+        System.out.printf("      %s            %s   \n",userDirection,cpDirection);
+        System.out.println("================== ==================");
     }
 
 
     public String decideWinner() {
-        if((userDirection.contains("up") && cpDirection.contains("up")) ||
-         (userDirection.contains("right") && cpDirection.contains("right")  ) ||
-         (userDirection.contains("down") && cpDirection.contains("down")) ||
-         (userDirection.contains("left") && cpDirection.contains("left"))) {
-              return isUserTurn ? "user" : "cp";
-         } else return "none";
+        if ((userDirection.contains("up") && cpDirection.contains("up")) ||
+                (userDirection.contains("right") && cpDirection.contains("right")) ||
+                (userDirection.contains("down") && cpDirection.contains("down")) ||
+                (userDirection.contains("left") && cpDirection.contains("left"))) {
+            return isUserTurn ? "user" : "cp";
+        } else
+            return "none";
+    }
+    
+    private void showWinner() {
+        switch (winner) {
+            case ("user"):
+                System.out.println("you win !!");
+                break;
+            case ("cp"):
+                System.out.println("you lose...");
+                break;
+            case ("none"):
+                System.out.println("winner not decided. back to janken!");
+                break;
+        }
     }
 
-   
-    
+
+
+    public void doAcchimuitehoi(String jankenWinner, Scanner s) {
+        userDirection = "";
+        cpDirection = "";
+        isUserTurn = false;
+        
+        System.out.println("acchimuite hoi!!");
+        try {
+             Thread.sleep(1000);
+            if (jankenWinner.equals("user")) {
+                showOption(hand.getUp(), hand.getRight(), hand.getDown(), hand.getLeft());
+                String directionKey = s.next();
+                Thread.sleep(1000);
+                ClrScr.clrscr(); 
+                decideUserDirection(directionKey, hand);
+                decideCPDirection(face);
+                showResult();  
+                isUserTurn = true;
+                winner = decideWinner();
+                showWinner();
+            } else {
+                showOption(face.getUp(), face.getRight(), face.getDown(), face.getLeft());
+                String directionKey = s.next();
+                Thread.sleep(1000);
+                ClrScr.clrscr();
+                decideUserDirection(directionKey, face);
+                decideCPDirection(hand);
+                showResult();
+                winner = decideWinner();
+                showWinner();
+            }
+        } catch (Exception e) {
+            ClrScr.clrscr();
+            System.out.println("Wrong Input! Only enter the input displayed option. please select again!!!");
+        }
+       
+    }
 
     
-
-
 
 }
